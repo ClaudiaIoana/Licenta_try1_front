@@ -1,0 +1,97 @@
+body {
+    background: teal;
+    margin: 0;
+    align-content: center;
+    font-family: Arial, sans-serif;
+}
+
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    gap:3px;
+    padding: 40px 20px;
+    background: whitesmoke;
+    box-shadow: 0 0 90px rgba(0, 0, 0, 0.5);
+    margin: 120px auto auto;
+    border-radius: 20px;
+}
+
+.titleContainer {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: teal;
+}
+
+.signInButton {
+    background: teal;
+    color: black;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.inputContainer {
+    margin: 10px 0;
+}
+
+.inputField {
+    height: 30px;
+    width: 200px;
+    background: lightgrey;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 0 10px;
+    font-size: 14px;
+    font-weight: 300;
+    color: black;
+    outline: none;
+}
+
+.passwordInputContainer {
+    display: flex;
+    align-items: center;
+}
+
+.eyeButton {
+    background: teal;
+    color: #333333;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.buttonContainer {
+    display: flex;
+    margin-top: 20px;
+}
+
+.inputButton {
+    background: teal;
+    color: white;
+    padding: 15px 60px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cancelButton {
+    background: #666666;
+    color: #ffffff;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.error {
+    color: darkred;
+    margin-top: 5px;
+}
