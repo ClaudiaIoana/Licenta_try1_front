@@ -1,4 +1,4 @@
-import {useState} from "react";
+import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
 import './register.css';
 
@@ -14,6 +14,7 @@ const Register = (props: any) => {
     const [password2_error, setPassword2Error] = useState("");
     const [first_name, setFirstName] = useState("");
     const [last_name, setLastName] = useState("");
+    const [rightCredentials, setRightCredentials] = useState(true);
 
     const navigate = useNavigate();
 
@@ -52,11 +53,11 @@ const Register = (props: any) => {
         console.log("in add new user66");
 
         if(password1.length < 7){
-            setPassword1Error("The password has to have at least 7 characters. ");
+            setPassword1Error("Password must have at least 7 characters. ");
         }
 
         if(password2.length < 7){
-            setPassword2Error("The password has to have at least 7 characters. ");
+            setPassword2Error("Password must have at least 7 characters. ");
         }
 
         console.log('here');
@@ -91,6 +92,28 @@ const Register = (props: any) => {
                             role: "regular",
                         })
                     );
+                    console.log(data.email);
+                    if (
+                        data.email && (data.email[0] === "This field may not be blank." ||
+                        data.email[0] === "Enter a valid email address." )||
+                        data.username && (data.username[0] === "This field may not be blank." ||
+                            data.username[0] ===  "A user with that username already exists.")
+                         ||
+                        (data.first_name && data.first_name[0] === "This field may not be blank." )
+                        ||(data.last_name && data.last_name[0] === "This field may not be blank.")
+                         ||data.password1 && (data.password1[0] === "This field may not be blank." ||
+                            data.password1[0] === "This password is too short. It must contain at least 8 characters.") ||
+                        data.password2 && data.password2[0] === "This field may not be blank."||
+                        data.non_field_errors != null
+                    ) {
+                        setRightCredentials(false);
+                        console.log("am intrat");
+                    } else {
+                        setTimeout(() => {
+                            navigate("/");
+                        }, 500);
+                        setRightCredentials(true);
+                    }
                 });
         } catch (error) {
             console.error(error);
@@ -98,6 +121,12 @@ const Register = (props: any) => {
     };
 
     return (
+        <div>
+        <section>
+            <div className="arrow-container" onClick={handleCancel}>
+                <button className="add-button">&#8592;</button>
+            </div>
+        </section>
         <div className="mainContainer">
             <div className="titleContainer">
                 <div>Register Here</div>
@@ -169,8 +198,10 @@ const Register = (props: any) => {
                     onClick={addNewUser}
                     value={"Register"}
                 />
+                {!rightCredentials && <div>The credentials are incorrect</div>}
             </div>
 
+        </div>
         </div>
     )
 

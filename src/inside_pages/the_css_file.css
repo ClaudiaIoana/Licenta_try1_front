@@ -1,0 +1,147 @@
+
+.welcome-container {
+    text-align: center;
+    background-color: black;
+    color: white;
+    padding-bottom: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.welcome-message {
+    flex-grow: 1;
+    text-align: left;
+    top: 70px;
+    margin-left: 100px;
+}
+
+.teal-line {
+    border: 0;
+    height: 1px;
+    background-color: #0f506c; /* Teal line */
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.add-button2 {
+    color: whitesmoke;
+    background: black;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    margin: 0 10px;
+    cursor: pointer;
+    outline: none;
+}
+
+.login-button {
+    background-color: #0f506c; /* Teal login button */
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+.sections-container {
+    margin-top: 20px;
+    display: flex; /* Use Flexbox */
+}
+
+.section {
+    flex: 1; /* Each section takes up equal space */
+    padding: 20px;
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow */
+}
+
+.section:last-child {
+    margin-right: 0; /* Remove margin from the last section */
+}
+
+.arrow-button {
+    position: absolute;
+    top:10px;
+    left: 20px; /* Adjust as needed */
+    background: black;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    cursor: pointer;
+    outline: none;
+}
+
+.notes-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Two columns */
+    gap: 20px; /* Spacing between note cubes */
+}
+
+.note-cube {
+    position: relative;
+    width: 350px;
+    background-color: black;
+    color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    margin-right: 20px;
+    flex-direction: column;
+}
+
+
+.add-note-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 1000px;
+    padding: 40px 20px;
+    background: whitesmoke;
+    box-shadow: 0 0 90px rgba(0, 0, 0, 0.5);
+    margin: 120px auto auto;
+    border-radius: 20px;
+}
+
+.add-note-container textarea{
+    width: 970px;
+}
+
+.add-note-container label{
+    margin-top: 30px;
+}
+
+.add-note-container input{
+    width: 970px;
+    box-shadow: 0 0 90px rgba(0, 0, 0, 0.5);
+    margin: 10px auto auto;
+}
+
+.details-button {
+    background-color: black;
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    margin-left: 270px;
+    border: 2px solid black;
+}

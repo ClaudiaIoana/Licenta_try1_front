@@ -1,5 +1,5 @@
 body {
-    background: teal;
+    background: #0f506c;
     margin: 0;
     align-content: center;
     font-family: Arial, sans-serif;
@@ -10,29 +10,11 @@ body {
     flex-direction: column;
     align-items: center;
     width: 300px;
-    gap:3px;
     padding: 40px 20px;
     background: whitesmoke;
     box-shadow: 0 0 90px rgba(0, 0, 0, 0.5);
     margin: 120px auto auto;
     border-radius: 20px;
-}
-
-.titleContainer {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 15px;
-    color: teal;
-}
-
-.signInButton {
-    background: teal;
-    color: black;
-    padding: 10px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
 }
 
 .inputContainer {
@@ -47,23 +29,13 @@ body {
     border-radius: 3px;
     padding: 0 10px;
     font-size: 14px;
-    font-weight: 300;
     color: black;
     outline: none;
 }
 
-.passwordInputContainer {
-    display: flex;
-    align-items: center;
-}
-
-.eyeButton {
-    background: teal;
-    color: #333333;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-left: 5px;
+.error {
+    color: darkred;
+    margin-top: 5px;
 }
 
 .buttonContainer {
@@ -71,8 +43,28 @@ body {
     margin-top: 20px;
 }
 
+.add-button{
+    background: #0f506c;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    margin: 0 10px;
+    cursor: pointer;
+    outline: none;
+}
+
+.buttonsContainer{
+    display: flex;
+    margin-top: 10px;
+    flex-direction: column;
+    align-items: center;
+}
+
 .inputButton {
-    background: teal;
+    background: #0f506c;
     color: white;
     padding: 15px 60px;
     font-size: 16px;
@@ -81,17 +73,88 @@ body {
     cursor: pointer;
 }
 
-.cancelButton {
-    background: #666666;
-    color: #ffffff;
-    padding: 10px;
+.titleContainer {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: black;
+}
+
+.signInButton {
+    background-color: #0f506c;
+    color: white;
+    padding: 10px 30px;
     font-size: 16px;
-    border: none;
+    margin-top: 15px;
+    margin-bottom: 15px;
     border-radius: 5px;
+    border: none;
     cursor: pointer;
 }
 
-.error {
-    color: darkred;
-    margin-top: 5px;
+.eyeButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+    margin-left: -20px; /* Adjust as needed */
+    position: relative;
+    z-index: 2;
+}
+
+.sidebar {
+    width: 200px; /* Adjust width as needed */
+    padding: 20px;
+    background-color: #282c34;
+    color: white;
+    position: fixed;
+    height: 100%;
+    overflow-y: auto; /* Enable vertical scrolling if content overflows */
+}
+
+.content-container {
+    display: flex;
+}
+
+.sidebar h2 {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.sidebar input[type="text"] {
+    width: calc(100% - 40px); /* Subtract padding from width */
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+/* Notes container styles (optional) */
+.notes-container {
+    margin-left: 60px;
+    padding: 30px;
+    flex-grow: 1;
+}
+
+/* Title styles */
+.title {
+    font-weight: bold;
+}
+
+.importance {
+    color: white;
+    align-self: flex-end;
+    margin-right: 20px;
+}
+
+
+.logout-button {
+    background-color: #0f506c;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-left: 30px;
+    margin-right: 50px;
+    margin-top: 20px;
 }
