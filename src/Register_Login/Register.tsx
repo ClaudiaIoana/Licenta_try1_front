@@ -32,19 +32,19 @@ const Register = (props: any) => {
         setPassword2Error("");
 
         if ("" === username){
-            setUsernameError("Please enter a username. ");
+            setUsernameError("Introdu un nume de utilizator.");
         }
 
         if ("" === email){
-            setUsernameError("Please enter an email. ");
+            setUsernameError("Introdu un email.");
         }
 
         if ("" === password1){
-            setPassword1Error("Please enter a password. ");
+            setPassword1Error("Introdu o parolă.");
         }
 
         if ("" === password2){
-            setPassword2Error("Please enter the same password as the first one. ");
+            setPassword2Error("Introdu aceași parolă ca cea de mai sus.");
         }
 
         if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
@@ -53,11 +53,11 @@ const Register = (props: any) => {
         console.log("in add new user66");
 
         if(password1.length < 7){
-            setPassword1Error("Password must have at least 7 characters. ");
+            setPassword1Error("Parola trebuie să aibă cel puțin 7 caractere.");
         }
 
         if(password2.length < 7){
-            setPassword2Error("Password must have at least 7 characters. ");
+            setPassword2Error("Parola trebuie să aibă cel puțin 7 caractere.");
         }
 
         console.log('here');
@@ -129,13 +129,13 @@ const Register = (props: any) => {
         </section>
         <div className="mainContainer">
             <div className="titleContainer">
-                <div>Register Here</div>
+                <div>Înregistrează-te</div>
             </div>
             <br />
             <div className="inputContainer">
                 <input
                     value={first_name}
-                    placeholder={"First Name"}
+                    placeholder={"Prenume"}
                     onChange={(ev)=>setFirstName(ev.target.value)}
                     className="inputField"
                 />
@@ -144,7 +144,7 @@ const Register = (props: any) => {
             <div className="inputContainer">
                 <input
                     value={last_name}
-                    placeholder={"Last Name"}
+                    placeholder={"Nume de familie"}
                     onChange={(ev)=>setLastName(ev.target.value)}
                     className="inputField"
                 />
@@ -153,7 +153,7 @@ const Register = (props: any) => {
             <div className="inputContainer">
                 <input
                     value={username}
-                    placeholder={"Username"}
+                    placeholder={"Nume de utilizator"}
                     onChange={(ev)=>setUsername(ev.target.value)}
                     className="inputField"
                 />
@@ -173,7 +173,7 @@ const Register = (props: any) => {
             <div className="inputContainer">
                 <input
                     value={password1}
-                    placeholder={"Password"}
+                    placeholder={"Parolă"}
                     onChange={(ev)=>setPassword1(ev.target.value)}
                     className="inputField"
                 />
@@ -183,7 +183,7 @@ const Register = (props: any) => {
             <div className="inputContainer">
                 <input
                     value={password2}
-                    placeholder={"Confirm Password"}
+                    placeholder={"Confirmă parola"}
                     onChange={(ev)=>setPassword2(ev.target.value)}
                     className="inputField"
                 />
@@ -196,9 +196,8 @@ const Register = (props: any) => {
                     className="inputButton"
                     type="button"
                     onClick={addNewUser}
-                    value={"Register"}
+                    value={"Salvează"}
                 />
-                {!rightCredentials && <div>The credentials are incorrect</div>}
             </div>
 
         </div>

@@ -9,10 +9,14 @@ import Login from "./Register_Login/Login";
 import WelcomePage from "./inside_pages/WelcomePage";
 import Logout from "./Register_Login/Logout";
 import Notes from "./inside_pages/Notes";
-import FlashCards from "./inside_pages/FlashCards";
+import AllFlashCards from "./inside_pages/Flashcards-pages/AllFlashCards";
 import AddNote from "./inside_pages/AddNote";
 import UpdateNote from "./inside_pages/UpdateNote";
 import DetailsNote from "./inside_pages/DetailsNote";
+import MainFlashCardsPage from "./inside_pages/Flashcards-pages/MainFlashCardsPage";
+import TestingCriteriaPage from "./inside_pages/Flashcards-pages/TestingCriteriaPage";
+import TestingDomainPage from "./inside_pages/Flashcards-pages/TestingDomainPage";
+import CardsOnDetail from "./inside_pages/Flashcards-pages/CandsOnDetail";
 
 function App() {
     const [loggedIn, setLoggedIn] = useState(false);
@@ -53,7 +57,12 @@ function App() {
 
                     <Route path="/logout" element={<Logout></Logout>} />
                     <Route path="/notes/*" element={<Notes></Notes>} />
-                    <Route path="/flash_cards/*" element={<FlashCards></FlashCards>} />
+                    <Route path="/flash_cards/*" element={<MainFlashCardsPage></MainFlashCardsPage>} />
+                    <Route path="/flash_cards/all-cards" element={<AllFlashCards></AllFlashCards>} />
+                    <Route path="/flash_cards/criteria" element={<TestingCriteriaPage></TestingCriteriaPage>} />
+                    <Route path="/flash_cards/domain" element={<TestingDomainPage></TestingDomainPage>} />
+                    <Route path="/flash_cards/domain/card" element={<CardsOnDetail></CardsOnDetail>} />
+
                     <Route path="/add-note" element={<AddNote></AddNote>} />
                     <Route path="/details-note" element={<DetailsNote></DetailsNote>}/>
                     <Route path="/update-note" element={<UpdateNote></UpdateNote>}/>

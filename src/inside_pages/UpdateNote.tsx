@@ -45,7 +45,7 @@ const UpdateNote = (props: any) =>{
                         title: noteData.title,
                         topic: noteData.topic,
                         content: noteData.content,
-                        observations: noteData.content,
+                        observations: noteData.observations,
                         importance: noteData.importance,
                         creator: noteDetail.creator,
                     }),

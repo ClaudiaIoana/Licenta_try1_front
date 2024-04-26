@@ -52,18 +52,23 @@ const Notes = (props: any) => {
                 </section>
                 <header className="header">
                     <div className="welcome-message">
-                        <h1>Your notes</h1>
+                        <h1>Notițele tale</h1>
                     </div>
-                    <Link to="/logout" className="logout-button">Logout</Link>
-                    <Link to="/add-note">
-                        <button >Add New Note</button>
-                    </Link>
+                    <Link to="/logout" className="logout-button">Deconectare</Link>
                 </header>
             </div>
+            <div className="add-note-section">
+                <Link to="/add-note">
+                    <button className="add-note-button">
+                        <span className="plus-sign">+</span> Crează o nouă notiță
+                    </button>
+                </Link>
+            </div>
+
             <div className="content-container">
                 <div className="notes-container">
                     {allNotes.map((note, index) => (
-                        <div key={index} className="note-cube">
+                        <div key={index} className={`note-cube note-type-${index % 8}`}>
                             <div style={{ marginBottom: "10px" }}>
                                 <h2 className="title">
                                     {note.title}
@@ -72,7 +77,7 @@ const Notes = (props: any) => {
                                     Topic: {note.topic}
                                 </div>
                             </div>
-                            <Link to="/details-note" state={{ noteDetail: note }} className="details-button">Details</Link>
+                            <Link to="/details-note" state={{ noteDetail: note }} className="details-button">Detalii</Link>
                         </div>
                     ))}
                 </div>

@@ -21,21 +21,21 @@ const StartPage = (props: { loggedIn: any; email: any; setLoggedIn: any }) => {
 
     return (
         <div className="mainContainer">
-            <div className="titleContainer">Welcome to your learning environment</div>
+            <div className="titleContainer">Bun venit pe platforma ta de învățare</div>
                 <div className="buttonsContainer">
-                    <div className="textContainer">Are you already signed up? </div>
+                    <div className="textContainer">Ai deja un cont? </div>
                     <input
                         className="signInButton"
                         type="button"
                         onClick={onButtonClickLogIn}
-                        value={loggedIn ? "Log out" : "Log in"}
+                        value={loggedIn ? "Deconectare" : "Conectare"}
                     />
-                    <div className="textContainer">Would you like to join our platform? </div>
+                    <div className="textContainer">Vrei să îți creezi un cont? </div>
                     <input
                         className="signInButton"
                         type="button"
                         onClick={onButtonClickSignUp}
-                        value="Sign Up"
+                        value="Înregistrează-te"
                     />
                 {loggedIn && <div>Your username is {email}</div>}
             </div>

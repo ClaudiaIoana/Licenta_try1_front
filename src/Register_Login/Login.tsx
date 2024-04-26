@@ -99,7 +99,7 @@ const Login = (props: any) => {
             </section>
         <div className="mainContainer">
             <div className="titleContainer">
-                <div>Login</div>
+                <div>Conectare</div>
             </div>
             <br />
             <div className="inputContainer">
@@ -116,7 +116,7 @@ const Login = (props: any) => {
                 <div className="inputContainer">
                     <input
                         value={password}
-                        placeholder="Password"
+                        placeholder="Parolă"
                         onChange={(ev) => setPassword(ev.target.value)}
                         className="inputField"
                         type={showPassword ? "text" : "password"}
@@ -137,9 +137,9 @@ const Login = (props: any) => {
                     className="inputButton"
                     type="button"
                     onClick={onButtonClick}
-                    value={"Log in"}
+                    value={"Conectare"}
                 />
-                {!rightCredentials && <div>The credentials are incorrect</div>}
+                {!rightCredentials && <div>Credențialele sunt incorecte.</div>}
             </div>
         </div>
         </div>

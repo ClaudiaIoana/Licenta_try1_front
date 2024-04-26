@@ -37,6 +37,7 @@ const AddNote = () => {
     };
 
     const onSaveNewNote = async (event: { preventDefault: () => void }) =>{
+        console.log('here')
         try{
             const response = await fetch("http://127.0.0.1:8000/notes/",
                 {
@@ -106,7 +107,7 @@ const AddNote = () => {
                         onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
                             handleDataChange(e)
                         }
-                        rows={4}
+                        rows={10}
                     />
                 </label>
                 <label>
@@ -120,12 +121,15 @@ const AddNote = () => {
                 </label>
                 <label>
                     Observations:
-                    <input
-                        type="string"
+                    <textarea
                         name="observations"
                         value={noteData.observations}
-                        onChange={handleDataChange}
+                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                            handleDataChange(e)
+                        }
+                        rows={10}
                     />
+
                 </label>
                 <label>
                     Importance:
@@ -137,14 +141,12 @@ const AddNote = () => {
                     />
                 </label>
             </form>
-            <div className="inputContainer">
-                <input
-                    className="inputButton"
-                    type="button"
-                    onClick={onSaveNewNote}
-                    value={"Add note"}
+            <input
+                className="add-note-button"
+                type="button"
+                onClick={onSaveNewNote}
+                value={"Add note"}
                 />
-            </div>
 
         </div>
         </div>

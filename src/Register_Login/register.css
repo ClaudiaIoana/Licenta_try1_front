@@ -1,5 +1,5 @@
 body {
-    background: #0f506c;
+    background:  #ADD8E6;
     margin: 0;
     align-content: center;
     font-family: Arial, sans-serif;
@@ -24,13 +24,14 @@ body {
 .inputField {
     height: 30px;
     width: 200px;
-    background: lightgrey;
-    border: 1px solid #ccc;
-    border-radius: 3px;
     padding: 0 10px;
     font-size: 14px;
     color: black;
     outline: none;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    transition: border-color 0.3s;
 }
 
 .error {
@@ -44,8 +45,7 @@ body {
 }
 
 .add-button{
-    background: #0f506c;
-    color: white;
+    background:  #ADD8E6;
     border: none;
     border-radius: 50%;
     width: 40px;
@@ -54,6 +54,7 @@ body {
     margin: 0 10px;
     cursor: pointer;
     outline: none;
+    font-weight: bold;
 }
 
 .buttonsContainer{
@@ -64,9 +65,9 @@ body {
 }
 
 .inputButton {
-    background: #0f506c;
+    background: #4682B4;
     color: white;
-    padding: 15px 60px;
+    padding: 10px 80px;
     font-size: 16px;
     border: none;
     border-radius: 5px;
@@ -81,7 +82,7 @@ body {
 }
 
 .signInButton {
-    background-color: #0f506c;
+    background-color: #4682B4;
     color: white;
     padding: 10px 30px;
     font-size: 16px;
@@ -129,13 +130,6 @@ body {
     box-sizing: border-box;
 }
 
-/* Notes container styles (optional) */
-.notes-container {
-    margin-left: 60px;
-    padding: 30px;
-    flex-grow: 1;
-}
-
 /* Title styles */
 .title {
     font-weight: bold;
@@ -149,7 +143,7 @@ body {
 
 
 .logout-button {
-    background-color: #0f506c;
+    background-color: #4682B4;
     color: white;
     padding: 10px 20px;
     text-decoration: none;
@@ -157,4 +151,34 @@ body {
     margin-left: 30px;
     margin-right: 50px;
     margin-top: 20px;
+    font-weight: bold;
 }
+
+.logout-button:hover{
+    background-color:  #0056b3;
+}
+
+.details-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.left-section {
+    margin: 30px;
+    width: calc(60% - 30px); /* Adjusting for margin */
+    background-color: #F0FFF0; /* Pastel green color */
+    padding: 20px;
+    border-radius: 10px; /* Adding border radius for a softer look */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adding shadow for depth */
+}
+
+.right-section {
+    margin: 30px;
+    width: calc(40% - 30px); /* Adjusting for margin */
+    background-color: #F5F5F5; /* Pastel gray color */
+    padding: 20px;
+    border-radius: 10px; /* Adding border radius for a softer look */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adding shadow for depth */
+}
+
+

@@ -1,7 +1,6 @@
 
 .welcome-container {
     text-align: center;
-    background-color: black;
     color: white;
     padding-bottom: 20px;
 }
@@ -14,16 +13,11 @@
 }
 
 .welcome-message {
+    color: darkslategray;
     flex-grow: 1;
     text-align: left;
     top: 70px;
     margin-left: 100px;
-}
-
-.teal-line {
-    border: 0;
-    height: 1px;
-    background-color: #0f506c; /* Teal line */
 }
 
 .button-container {
@@ -34,16 +28,19 @@
 }
 
 .add-button2 {
-    color: whitesmoke;
-    background: black;
+    color: black;
+    background: inherit;
     border: none;
     border-radius: 50%;
     width: 40px;
     height: 40px;
-    font-size: 24px;
+    font-size: 17px;
     margin: 0 10px;
     cursor: pointer;
     outline: none;
+}
+.add-button2:hover{
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
 .login-button {
@@ -53,30 +50,51 @@
     text-decoration: none;
     border-radius: 5px;
     margin-left: 10px;
+
 }
+
 
 .sections-container {
     margin-top: 20px;
-    display: flex; /* Use Flexbox */
+    grid-template-columns: repeat(1, 1fr);
+    display: grid;
+    max-width: 1200px;
+    margin-left: auto; /* Center the sections horizontally */
+    margin-right: auto;
 }
 
 .section {
     flex: 1; /* Each section takes up equal space */
-    padding: 20px;
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow */
+    padding: 50px; /* Reduce padding for a more balanced look */
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1); /* Update box-shadow for a softer effect */
+}
+
+.section:first-child {
+    background-color: #E6E6FA;
+}
+
+.section:nth-child(3){
+    background-color: #5F9EA0;
+}
+
+.section:nth-child(2){
+    background-color: #d3a4a5;
 }
 
 .section:last-child {
-    margin-right: 0; /* Remove margin from the last section */
+    margin-right: 0;
+    background-color:  #FFFFE0;
 }
+
 
 .arrow-button {
     position: absolute;
-    top:10px;
-    left: 20px; /* Adjust as needed */
-    background: black;
-    color: white;
+    top:15px;
+    left: 35px; /* Adjust as needed */
+    background: inherit;
+    color: darkslategray;
     border: none;
     border-radius: 50%;
     width: 40px;
@@ -90,58 +108,233 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr); /* Two columns */
     gap: 20px; /* Spacing between note cubes */
+    margin-left: 60px;
+    padding: 30px;
+    flex-grow: 1;
 }
 
 .note-cube {
     position: relative;
-    width: 350px;
+    width: 330px;
     background-color: black;
     color: white;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    box-shadow: 0 0 90px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 10px;
     margin-bottom: 10px;
-    margin-right: 20px;
+    margin-right: 15px;
     flex-direction: column;
 }
 
+.note-cube.note-type-0, .note-type-7 {
+    background-color: #6A5ACD; /* Tomato */
+}
 
-.add-note-container{
+.note-cube.note-type-1, .note-type-6 {
+    background-color: #5F9EA0; /* Tomato */
+}
+
+.note-cube.note-type-2, .note-type-5 {
+    background-color: #6495ED; /* Steel Blue */
+}
+
+.note-cube.note-type-3, .note-type-4 {
+    background-color: #458B74; /* Light Green */
+}
+
+
+.add-note-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 1000px;
+    width: 1200px; /* Adjust as needed */
     padding: 40px 20px;
     background: whitesmoke;
-    box-shadow: 0 0 90px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin: 120px auto auto;
     border-radius: 20px;
 }
 
-.add-note-container textarea{
-    width: 970px;
+.add-note-container form {
+    width: 100%; /* Ensure form takes full width of container */
 }
 
-.add-note-container label{
-    margin-top: 30px;
+.add-note-container label {
+    display: block;
+    margin-bottom: 20px;
 }
 
-.add-note-container input{
-    width: 970px;
-    box-shadow: 0 0 90px rgba(0, 0, 0, 0.5);
-    margin: 10px auto auto;
+.add-note-container input,
+.add-note-container textarea {
+    width: 100%; /* Take full width of parent container */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 5px;
+    box-sizing: border-box; /* Ensure padding and border are included in width */
 }
+
+.add-note-container input[type="submit"] {
+    background-color: #4682B4; /* Blue color, you can adjust as needed */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-note-container input[type="submit"]:hover {
+    background-color: #0056b3; /* Darker blue on hover, you can adjust as needed */
+}
+
 
 .details-button {
-    background-color: black;
+    background-color: inherit; /* Blue color, you can adjust as needed */
     color: white;
-    padding: 10px;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    margin-left: 230px;
+    border: 2px solid inherit; /* Border color matches background */
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s; /* Smooth transition on hover */
+    cursor: pointer;
+    display: inline-block; /* Ensure the button takes only the necessary space */
+}
+
+.details-button:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+
+/*maybe delete this later*/
+.card-grid {
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    border-radius: .25rem;
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, .3);
+    background-color: white;
+    transform-style: preserve-3d;
+    transition: 300ms;
+    cursor: pointer;
+    transform: perspective(1000px) rotateY(var(--rotate-y, 0)) translateY(var(--translate-y, 0));
+    min-width: 200px;
+    min-height: 200px;
+    max-width: 400px;
+    max-height: 400px;
+}
+
+.card:hover {
+    --translate-y: -2px;
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, .5);
+}
+
+.card.flip {
+    --rotate-y: 180deg;
+}
+
+.card .front {
+    left: 0;
+}
+
+.card .front,
+.card .back {
+    position: absolute;
+    padding: 1rem;
+    backface-visibility: hidden;
+}
+
+.card .back {
+    transform: rotateY(180deg);
+}
+
+.flashcard-options {
+    margin-top: .5rem;
+}
+
+.flashcard-option {
+    margin-top: .25rem;
+    color: #555;
+    font-size: .75rem;
+}
+
+.flashcard-option:first-child {
+    margin-top: 0;
+}
+
+.card .front {
+    left: 0;
+    transform: rotateY(0deg); /* Ensure the front side is not rotated */
+}
+
+.card .back {
+    transform: rotateY(180deg); /* Rotate the back side by 180 degrees */
+}
+
+.add-note-link {
+    text-decoration: none;
+}
+
+.add-note-button {
+    background-color: #4682B4; /* Blue color, you can adjust as needed */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-note-button:hover {
+    background-color: #0056b3; /* Darker blue on hover, you can adjust as needed */
+}
+
+.plus-sign {
+    margin-right: 5px;
+}
+
+.add-note-section{
+    margin-bottom: 80px;
+}
+
+
+.update-button {
+    background-color: rgba(0, 0, 0, 0.3);
+    color: black;
+    padding: 10px 15px;
     text-decoration: none;
     border-radius: 5px;
     margin-top: 20px;
     margin-left: 270px;
-    border: 2px solid black;
+    border: 2px solid inherit;
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s; /* Smooth transition on hover */
+    cursor: pointer;
+    display: inline-block;
+}
+
+.update-button:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.notes-container2 {
+    display: flex;
+    gap: 20px;
+    margin-left: 60px;
+    padding: 30px;
+    flex-grow: 1;
 }

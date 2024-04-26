@@ -17,33 +17,44 @@ const WelcomePage = (props:any) => {
     console.log(localStorage.getItem("token"))
 
     return (
-        <div>
+        <div className="page-container">
         <div className="welcome-container">
             <header className="header">
                 <div className="welcome-message">
-                    <h1>Welcome to Your New Learning Environment</h1>
-                    <p>We are glad to have you here!</p>
                 </div>
-                <Link to="/logout" className="logout-button">Logout</Link>
+                <Link to="/logout" className="logout-button">Deconectare</Link>
             </header>
         </div>
+            <div>
+                <p> BLa bla bla intro</p>
+            </div>
+
             <div className="sections-container">
 
                 <section className="section">
-                    <h2 className="section-title">Section 1</h2>
+                    <h2 className="section-title">Notițe</h2>
                     <div className="button-container">
                         <button className="add-button2"
                                 onClick={onAddNotes}>&#8594;</button>
-                        <span>Navigate to your notes</span>
+                        <span>Mergi la notițele tale.</span>
                     </div>
                 </section>
 
                 <section className="section">
-                    <h2 className="section-title">Section 2</h2>
+                    <h2 className="section-title">Flashcarduri</h2>
                     <div className="button-container">
                         <button className="add-button2"
                         onClick={onAddFlashCards}>&#8594;</button>
-                        <span>Navigate to your flash cards</span>
+                        <span>Testează-ți cunoștințele folosind flashcarduri.</span>
+                    </div>
+                </section>
+
+                <section className="section">
+                    <h2 className="section-title">Chatbot</h2>
+                    <div className="button-container">
+                        <button className="add-button2"
+                                onClick={onAddFlashCards}>&#8594;</button>
+                        <span>Comunică cu chatbotul pentru a înțelege mai multe despre boli.</span>
                     </div>
                 </section>
             </div>
