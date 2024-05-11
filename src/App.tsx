@@ -14,9 +14,15 @@ import AddNote from "./inside_pages/AddNote";
 import UpdateNote from "./inside_pages/UpdateNote";
 import DetailsNote from "./inside_pages/DetailsNote";
 import MainFlashCardsPage from "./inside_pages/Flashcards-pages/MainFlashCardsPage";
-import TestingCriteriaPage from "./inside_pages/Flashcards-pages/TestingCriteriaPage";
-import TestingDomainPage from "./inside_pages/Flashcards-pages/TestingDomainPage";
-import CardsOnDetail from "./inside_pages/Flashcards-pages/CandsOnDetail";
+import DisplayAllCriteria from "./inside_pages/Flashcards-pages/DisplayAllCriteria";
+import DisplayAllDomains from "./inside_pages/Flashcards-pages/DisplayAllDomains";
+import CardsOnDetail from "./inside_pages/Flashcards-pages/CandsOnDomain";
+import CardsOnDomain from "./inside_pages/Flashcards-pages/CandsOnDomain";
+import CardsOnCriteria from "./inside_pages/Flashcards-pages/CardsOnCriteria";
+import ArchivedCards from "./inside_pages/Flashcards-pages/ArchivedCards";
+import AddFlashcards from "./inside_pages/Flashcards-pages/AddFlashcards";
+import AddCriteria from "./inside_pages/Flashcards-pages/AddCriteria";
+import AddDomain from "./inside_pages/Flashcards-pages/AddDomain";
 
 function App() {
     const [loggedIn, setLoggedIn] = useState(false);
@@ -57,11 +63,18 @@ function App() {
 
                     <Route path="/logout" element={<Logout></Logout>} />
                     <Route path="/notes/*" element={<Notes></Notes>} />
+
                     <Route path="/flash_cards/*" element={<MainFlashCardsPage></MainFlashCardsPage>} />
                     <Route path="/flash_cards/all-cards" element={<AllFlashCards></AllFlashCards>} />
-                    <Route path="/flash_cards/criteria" element={<TestingCriteriaPage></TestingCriteriaPage>} />
-                    <Route path="/flash_cards/domain" element={<TestingDomainPage></TestingDomainPage>} />
-                    <Route path="/flash_cards/domain/card" element={<CardsOnDetail></CardsOnDetail>} />
+                    <Route path="/flash_cards/criteria" element={<DisplayAllCriteria></DisplayAllCriteria>} />
+                    <Route path="/flash_cards/domain" element={<DisplayAllDomains></DisplayAllDomains>} />
+                    <Route path="/flash_cards/domain/card" element={<CardsOnDomain  ></CardsOnDomain>} />
+                    <Route path="/flash_cards/criteria/card" element={<CardsOnCriteria  ></CardsOnCriteria>} />
+                    <Route path="/flash_cards/archive" element={<ArchivedCards> </ArchivedCards>}/>
+                    <Route path="/flash_cards/add_card" element={<AddFlashcards />} />
+                    <Route path="/flash_cards/add_criteria" element={<AddCriteria />} />
+                    <Route path="/flash_cards/add_domain" element={<AddDomain />} />
+
 
                     <Route path="/add-note" element={<AddNote></AddNote>} />
                     <Route path="/details-note" element={<DetailsNote></DetailsNote>}/>

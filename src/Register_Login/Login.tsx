@@ -1,6 +1,5 @@
 import React, { CSSProperties, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./register.css";
 
 const Login = (props: any) => {
     const [username, setUsername] = useState("");

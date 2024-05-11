@@ -18,7 +18,7 @@ const Notes = (props: any) => {
                     `http://127.0.0.1:8000/notes/`,
                     {
                         headers: {
-                            'Authorization': `${localStorage.getItem("token")}` // Assuming you're using Token-based authentication
+                            'Authorization': `${localStorage.getItem("token")}`
                         }
                     }
                 );

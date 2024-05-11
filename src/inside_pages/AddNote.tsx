@@ -7,7 +7,7 @@ import notes from "./Notes";
 
 const AddNote = () => {
     let [error, setError] = useState<string | null>(null);
-    const [isRecipeAdded, setIsRecipeAdded] = useState(false);
+    const [isNoteAdded, setIsNoteAdded] = useState(false);
 
 
     const [noteData, setNoteData] = useState({
@@ -68,7 +68,7 @@ const AddNote = () => {
             } else {
                 const data = await response.json();
                 console.log(data);
-                setIsRecipeAdded(true);
+                setIsNoteAdded(true);
             }
         } catch (error) {
             console.log("blaaaaa")

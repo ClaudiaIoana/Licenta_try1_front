@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import './register.css';
 
 const StartPage = (props: { loggedIn: any; email: any; setLoggedIn: any }) => {
     const { loggedIn, email } = props;

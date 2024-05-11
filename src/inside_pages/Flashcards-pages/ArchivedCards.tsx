@@ -2,11 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Flashcard } from "../../models/Flashcard";
 
-const AllFlashCards = (props: any) => {
+const ArchivedCards = (props: any) => {
     const [height, setHeight] = useState('initial');
     const [allFlashcards, setAllFlashcards] = useState<Flashcard[]>([]);
     const [flippedIndex, setFlippedIndex] = useState<number | null>(null);
-    const [error, setError] = useState<string | null>(null);
 
     const frontEls = useRef<(HTMLDivElement | null)[]>([]);
     const backEls = useRef<(HTMLDivElement | null)[]>([]);
@@ -15,7 +14,7 @@ const AllFlashCards = (props: any) => {
         const fetchData = async () => {
             try {
                 const response = await fetch(
-                    `http://127.0.0.1:8000/flashcards/flashcards/`,
+                    `http://127.0.0.1:8000/flashcards/flashcards/?archived=True`,
                     {
                         headers: {
                             'Authorization': `${localStorage.getItem("token")}`
@@ -26,27 +25,27 @@ const AllFlashCards = (props: any) => {
                 setAllFlashcards(data);
             } catch (error) {
                 console.error("Error fetching data:", error);
-                setError("An unexpected error occurred while fetching data.");
             }
         };
 
         fetchData();
     }, []);
 
+    function setMaxHeight() {
+        let maxHeight = 0;
+        frontEls.current.forEach((el, index) => {
+            const frontHeight = el?.getBoundingClientRect().height || 0;
+            const backHeight = backEls.current[index]?.getBoundingClientRect().height || 0;
+            maxHeight = Math.max(maxHeight, frontHeight, backHeight);
+        });
+        setHeight(`${maxHeight}px`);
+    }
+
     useEffect(() => {
         setMaxHeight();
         window.addEventListener('resize', setMaxHeight);
         return () => window.removeEventListener('resize', setMaxHeight);
-    }, []); // Run this effect only once after initial render
-
-    function setMaxHeight() {
-        const maxHeight = frontEls.current.reduce((max, el, index) => {
-            const frontHeight = el?.getBoundingClientRect().height || 0;
-            const backHeight = backEls.current[index]?.getBoundingClientRect().height || 0;
-            return Math.max(max, frontHeight, backHeight);
-        }, 0);
-        setHeight(`${maxHeight}px`);
-    }
+    }, []);
 
     const handleCancel = () => {
         window.location.href = `/flash_cards`;
@@ -56,13 +55,31 @@ const AllFlashCards = (props: any) => {
         setFlippedIndex(index === flippedIndex ? null : index);
     };
 
-    const handleArchive = async (card: Flashcard) => {
+    const handleDelete = async (card: Flashcard) => {
+        try {
+            const response = await fetch(`http://127.0.0.1:8000/flashcards/flashcards/${card.id}`, {
+                method: "DELETE",
+                headers: {
+                    Authorization: `${localStorage.getItem("token")}`,
+                },
+            });
+            if (response.ok) {
+                window.location.reload();
+            } else {
+                throw new Error("Failed to delete note");
+            }
+        } catch (error) {
+            console.error("Error deleting note:", error);
+        }
+    };
+
+    const handleUnarchive = async (card:Flashcard) =>{
         try {
             const response = await fetch(`http://127.0.0.1:8000/flashcards/flashcards/${card.id}/`,
                 {
                     method: "PATCH",
                     body: JSON.stringify({
-                        archived: true,
+                        archived: false,
                     }),
                     headers: {
                         Accept: "application/json",
@@ -78,10 +95,8 @@ const AllFlashCards = (props: any) => {
             }
         } catch (error) {
             console.error("Error archiving flashcard:", error);
-            setError("An unexpected error occurred while archiving the flashcard.");
         }
     }
-
 
     return (
         <div>
@@ -93,17 +108,9 @@ const AllFlashCards = (props: any) => {
                 </section>
                 <header className="header">
                     <div className="welcome-message">
-                        <h1>Toate flashcardurile</h1>
+                        <h1>Cardurile arhivate</h1>
                     </div>
                 </header>
-            </div>
-
-            <div className="add-note-section">
-                <Link to="/flash_cards/add_card">
-                    <button className="add-note-button">
-                        <span className="plus-sign">+</span> Crează un nou flashcard
-                    </button>
-                </Link>
             </div>
 
             <div className="content-container">
@@ -114,21 +121,24 @@ const AllFlashCards = (props: any) => {
                             className={`note-cube note-type-${index % 8}`}
                         >
                             <div style={{ marginBottom: "10px" }}>
-                                <div className="title" ref={(el) => frontEls.current[index] = el}>
+                                <div className="title">
                                     Front: {card.front}
                                 </div>
-                                <div className="topic" ref={(el) => backEls.current[index] = el}>
+                                <div className="topic">
                                     Back: {card.back}
                                 </div>
                             </div>
-                            <button className="trashcan-button" onClick={() => handleArchive(card)}>📦</button>
+                            <div>
+                            <button className="trashcan-button" onClick={() => handleDelete(card)}> 🗑️
+                            </button>
+                            <button className="trashcan-button" onClick={() => handleUnarchive(card)}>📥</button>
+                            </div>
                         </div>
                     ))}
                 </div>
             </div>
-            {error && <div>Error: {error}</div>}
         </div>
     );
-};
+}
 
-export default AllFlashCards;
+export default ArchivedCards;

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import MyComponent from "./MyComponent";
 
 const DetailsNote = () => {
     const location = useLocation();
@@ -14,6 +13,7 @@ const DetailsNote = () => {
         importance: 0,
         observations: "",
     });
+
 
     useEffect(() => {
         setFormData({
@@ -71,24 +71,28 @@ const DetailsNote = () => {
             <div className="left-section">
                 <p>
                     <b>
-                        {String(formData.content)}
+                        <span dangerouslySetInnerHTML={{ __html: formData.content.replace(/\n/g, '<br>') }} />
                     </b>
                 </p>
             </div>
+
             <div className="right-section">
                 <p>
                     <b>
-                        {"Topics: ".concat(String(formData.topic))}
+                        {"Topics: "}
+                        <span dangerouslySetInnerHTML={{ __html: formData.topic.replace(/\n/g, '<br>') }} />
                     </b>
                 </p>
                 <p>
                     <b>
-                        {"Observations: ".concat(String(formData.observations))}
+                        {"Observations: "}
+                        <span dangerouslySetInnerHTML={{ __html: formData.observations.replace(/\n/g, '<br>') }} />
                     </b>
                 </p>
                 <p>
                     <b>
-                        {"Importance: ".concat(String(formData.importance))}
+                        {"Importance: "}
+                        <span dangerouslySetInnerHTML={{ __html: formData.importance.toString().replace(/\n/g, '<br>') }} />
                     </b>
                 </p>
                 <Link to="/update-note" state={{ noteDetail: noteDetail }} className="update-button">
@@ -105,6 +109,7 @@ const DetailsNote = () => {
                     </div>
                 )}
             </div>
+
         </div>
         </div>
     );

@@ -20,6 +20,14 @@ const MainFlashCardsPage = (props: any) => {
         navigate("/flash_cards/domain");
     }
 
+    const onArchivedCards = () =>{
+        navigate("/flash_cards/archive");
+    }
+
+    const handleCancel = () => {
+        window.location.href = `/welcome`;
+    };
+
     const onAddFlashCards = () => {
         navigate("/flash_cards");
     }
@@ -29,6 +37,11 @@ const MainFlashCardsPage = (props: any) => {
     return (
         <div className="page-container">
             <div className="welcome-container">
+                <section>
+                    <div className="arrow-container" onClick={handleCancel}>
+                        <button className="arrow-button">&#8592;</button>
+                    </div>
+                </section>
                 <header className="header">
                     <div className="welcome-message">
                     </div>
@@ -69,7 +82,7 @@ const MainFlashCardsPage = (props: any) => {
                     <h2 className="section-title">Cardurile arhivate</h2>
                     <div className="button-container">
                         <button className="add-button2"
-                                onClick={onAddFlashCards}>&#8594;</button>
+                                onClick={onArchivedCards}>&#8594;</button>
                     </div>
                 </section>
             </div>

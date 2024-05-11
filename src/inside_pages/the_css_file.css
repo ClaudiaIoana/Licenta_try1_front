@@ -1,4 +1,251 @@
 
+body {
+    background:  #ADD8E6;
+    margin: 0;
+    align-content: center;
+    font-family: Arial, sans-serif;
+}
+
+
+
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    padding: 40px 20px;
+    background: whitesmoke;
+    box-shadow: 0 0 90px rgba(0, 0, 0, 0.5);
+    margin: 120px auto auto;
+    border-radius: 20px;
+}
+
+.inputContainer {
+     margin: 10px 0;
+ }
+
+.inputField {
+    height: 30px;
+    width: 200px;
+    padding: 0 10px;
+    font-size: 14px;
+    color: black;
+    outline: none;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    transition: border-color 0.3s;
+}
+
+.error {
+    color: darkred;
+    margin-top: 5px;
+}
+
+.notes-container,
+.notes-container2,
+.notes-container3{
+    flex-grow: 1;
+    padding: 30px;
+    gap: 20px;
+}
+
+
+.notes-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin-left: 60px;
+}
+
+.notes-container3 {
+    display: flex;
+    justify-content: center;
+}
+
+.notes-container2 {
+    display: flex;
+}
+
+.buttonContainer {
+    display: flex;
+    margin-top: 20px;
+}
+
+.add-button,
+.add-button2{
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin: 0 10px;
+    cursor: pointer;
+    outline: none;
+}
+
+.add-button{
+    background:  #ADD8E6;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.add-button2 {
+    color: black;
+    background: inherit;
+    font-size: 17px;
+}
+.add-button2:hover{
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+
+.login-button,
+.logout-button{
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+
+.login-button {
+    background-color: #0f506c;
+    margin-left: 10px;
+}
+
+
+.logout-button {
+    background-color: #4682B4;
+    margin-left: 30px;
+    margin-right: 50px;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.logout-button:hover{
+    background-color:  #0f506c;
+}
+
+
+.arrow-button {
+    position: absolute;
+    top:15px;
+    left: 35px;
+    background: inherit;
+    color: darkslategray;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    cursor: pointer;
+    outline: none;
+}
+
+.inputButton,
+.signInButton{
+    background: #4682B4;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.inputButton {
+    padding: 10px 80px;
+}
+
+.signInButton {
+    padding: 10px 30px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.buttonsContainer{
+    display: flex;
+    margin-top: 10px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.titleContainer {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: black;
+}
+
+.eyeButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+    margin-left: -20px;
+    position: relative;
+    z-index: 2;
+}
+
+.sidebar {
+    width: 200px;
+    padding: 20px;
+    background-color: #282c34;
+    color: white;
+    position: fixed;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.content-container {
+    display: flex;
+}
+
+.sidebar h2 {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.sidebar input[type="text"] {
+    width: calc(100% - 40px);
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+
+.title {
+    font-weight: bold;
+}
+
+.importance {
+    color: white;
+    align-self: flex-end;
+    margin-right: 20px;
+}
+
+.left-section,
+.right-section{
+    margin: 30px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.left-section {
+    width: calc(60% - 30px);
+    background-color: #F0FFF0;
+}
+
+.right-section {
+    width: calc(40% - 30px);
+    background-color: #F5F5F5;
+}
+
+.details-container {
+    display: flex;
+    justify-content: space-between;
+}
+
 .welcome-container {
     text-align: center;
     color: white;
@@ -27,48 +274,21 @@
     margin-top: 20px;
 }
 
-.add-button2 {
-    color: black;
-    background: inherit;
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 17px;
-    margin: 0 10px;
-    cursor: pointer;
-    outline: none;
-}
-.add-button2:hover{
-    background-color: rgba(0, 0, 0, 0.3);
-}
-
-.login-button {
-    background-color: #0f506c; /* Teal login button */
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    margin-left: 10px;
-
-}
-
-
 .sections-container {
     margin-top: 20px;
     grid-template-columns: repeat(1, 1fr);
     display: grid;
     max-width: 1200px;
-    margin-left: auto; /* Center the sections horizontally */
+    margin-left: auto;
     margin-right: auto;
 }
 
 .section {
-    flex: 1; /* Each section takes up equal space */
-    padding: 50px; /* Reduce padding for a more balanced look */
+    flex: 1;
+    padding: 50px;
     border-radius: 10px;
     margin-bottom: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1); /* Update box-shadow for a softer effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
 .section:first-child {
@@ -89,30 +309,6 @@
 }
 
 
-.arrow-button {
-    position: absolute;
-    top:15px;
-    left: 35px; /* Adjust as needed */
-    background: inherit;
-    color: darkslategray;
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 24px;
-    cursor: pointer;
-    outline: none;
-}
-
-.notes-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Two columns */
-    gap: 20px; /* Spacing between note cubes */
-    margin-left: 60px;
-    padding: 30px;
-    flex-grow: 1;
-}
-
 .note-cube {
     position: relative;
     width: 330px;
@@ -130,19 +326,19 @@
 }
 
 .note-cube.note-type-0, .note-type-7 {
-    background-color: #6A5ACD; /* Tomato */
+    background-color: #6A5ACD;
 }
 
 .note-cube.note-type-1, .note-type-6 {
-    background-color: #5F9EA0; /* Tomato */
+    background-color: #5F9EA0;
 }
 
 .note-cube.note-type-2, .note-type-5 {
-    background-color: #6495ED; /* Steel Blue */
+    background-color: #6495ED;
 }
 
 .note-cube.note-type-3, .note-type-4 {
-    background-color: #458B74; /* Light Green */
+    background-color: #458B74;
 }
 
 
@@ -150,7 +346,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 1200px; /* Adjust as needed */
+    width: 1200px;
     padding: 40px 20px;
     background: whitesmoke;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -159,7 +355,7 @@
 }
 
 .add-note-container form {
-    width: 100%; /* Ensure form takes full width of container */
+    width: 100%;
 }
 
 .add-note-container label {
@@ -169,16 +365,16 @@
 
 .add-note-container input,
 .add-note-container textarea {
-    width: 100%; /* Take full width of parent container */
+    width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     margin-top: 5px;
-    box-sizing: border-box; /* Ensure padding and border are included in width */
+    box-sizing: border-box;
 }
 
 .add-note-container input[type="submit"] {
-    background-color: #4682B4; /* Blue color, you can adjust as needed */
+    background-color: #4682B4;
     color: white;
     border: none;
     border-radius: 5px;
@@ -189,22 +385,21 @@
 }
 
 .add-note-container input[type="submit"]:hover {
-    background-color: #0056b3; /* Darker blue on hover, you can adjust as needed */
+    background-color: #0056b3;
 }
 
-
 .details-button {
-    background-color: inherit; /* Blue color, you can adjust as needed */
+    background-color: inherit;
     color: white;
     padding: 10px 15px;
     text-decoration: none;
     border-radius: 5px;
     margin-top: 20px;
     margin-left: 230px;
-    border: 2px solid inherit; /* Border color matches background */
-    transition: background-color 0.3s, border-color 0.3s, color 0.3s; /* Smooth transition on hover */
+    border: 2px solid inherit;
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
     cursor: pointer;
-    display: inline-block; /* Ensure the button takes only the necessary space */
+    display: inline-block;
 }
 
 .details-button:hover {
@@ -212,7 +407,6 @@
 }
 
 
-/*maybe delete this later*/
 .card-grid {
     display: grid;
     align-items: center;
@@ -220,26 +414,31 @@
     gap: 1rem;
 }
 
+
 .card {
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
-    border-radius: .25rem;
-    box-shadow: 0 0 5px 2px rgba(0, 0, 0, .3);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     background-color: white;
     transform-style: preserve-3d;
-    transition: 300ms;
+    transition: 700ms;
     cursor: pointer;
     transform: perspective(1000px) rotateY(var(--rotate-y, 0)) translateY(var(--translate-y, 0));
-    min-width: 200px;
-    min-height: 200px;
-    max-width: 400px;
-    max-height: 400px;
+    width: 700px;
+    padding: 50px;
+    margin: 0 auto;
+    max-width: 100%;
+}
+
+.card .input{
+    margin: 30px;
 }
 
 .card:hover {
-    --translate-y: -2px;
+    --translate-y: -8px;
     box-shadow: 0 0 5px 2px rgba(0, 0, 0, .5);
 }
 
@@ -251,15 +450,18 @@
     left: 0;
 }
 
-.card .front,
-.card .back {
+.front,
+.back {
     position: absolute;
-    padding: 1rem;
+    padding: 80px;
     backface-visibility: hidden;
+    font-size: 1.5rem;
+    text-align: center;
 }
 
 .card .back {
     transform: rotateY(180deg);
+    margin: 40px;
 }
 
 .flashcard-options {
@@ -276,13 +478,13 @@
     margin-top: 0;
 }
 
-.card .front {
-    left: 0;
-    transform: rotateY(0deg); /* Ensure the front side is not rotated */
+.front {
+    transform: rotateY(0deg);
 }
 
-.card .back {
-    transform: rotateY(180deg); /* Rotate the back side by 180 degrees */
+
+.back {
+    transform: rotateY(180deg);
 }
 
 .add-note-link {
@@ -290,7 +492,7 @@
 }
 
 .add-note-button {
-    background-color: #4682B4; /* Blue color, you can adjust as needed */
+    background-color: #4682B4;
     color: white;
     border: none;
     border-radius: 5px;
@@ -301,7 +503,7 @@
 }
 
 .add-note-button:hover {
-    background-color: #0056b3; /* Darker blue on hover, you can adjust as needed */
+    background-color: #0056b3;
 }
 
 .plus-sign {
@@ -322,7 +524,7 @@
     margin-top: 20px;
     margin-left: 270px;
     border: 2px solid inherit;
-    transition: background-color 0.3s, border-color 0.3s, color 0.3s; /* Smooth transition on hover */
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
     cursor: pointer;
     display: inline-block;
 }
@@ -331,10 +533,69 @@
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-.notes-container2 {
+.trashcan-button{
+    background-color: inherit;
+    color: whitesmoke;
+    border:none;
+    padding: 15px 30px;
+    font-size: 24px;
+}
+
+.emoji {
+    font-size: 24px; 
+}
+
+.flag-message{
+    color: darkred;
+}
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
-    gap: 20px;
-    margin-left: 60px;
-    padding: 30px;
-    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.popup-inner {
+    background-color: #fff; 
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+    max-width: 80%; 
+    max-height: 80%; 
+    overflow-y: auto; 
+}
+
+.popup-inner h2 {
+    margin-top: 0;
+}
+
+.popup-inner p {
+    margin-bottom: 0;
+}
+
+.popup-inner button {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #007bff; 
+    color: #fff; 
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.popup-inner button:hover {
+    background-color: #0056b3; 
+}
+
+.exit-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }

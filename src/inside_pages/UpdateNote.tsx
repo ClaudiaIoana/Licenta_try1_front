@@ -7,7 +7,7 @@ const UpdateNote = (props: any) =>{
     const location = useLocation();
     const noteDetail = location.state?.noteDetail || {};
     let [error, setError] = useState<string | null>(null);
-    const [isRecipeAdded, setIsRecipeAdded] = useState(false);
+    const [isNoteAdded, setIsNoteAdded] = useState(false);
 
 
     const [noteData, setNoteData] = useState({
@@ -67,7 +67,7 @@ const UpdateNote = (props: any) =>{
             } else {
                 const data = await response.json();
                 console.log(data);
-                setIsRecipeAdded(true);
+                setIsNoteAdded(true);
             }
         } catch (error) {
             console.log("blaaaaa")
@@ -106,7 +106,7 @@ const UpdateNote = (props: any) =>{
                             onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
                                 handleDataChange(e)
                             }
-                            rows={4}
+                            rows={40}
                         />
                     </label>
                     <label>
@@ -120,11 +120,13 @@ const UpdateNote = (props: any) =>{
                     </label>
                     <label>
                         Observations:
-                        <input
-                            type="string"
+                        <textarea
                             name="observations"
                             value={noteData.observations}
-                            onChange={handleDataChange}
+                            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                                handleDataChange(e)
+                            }
+                            rows={40}
                         />
                     </label>
                     <label>
