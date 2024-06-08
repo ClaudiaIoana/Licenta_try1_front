@@ -1,5 +1,7 @@
 import React, { CSSProperties, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import cornerImage from "C:\\LICENTA\\front_try2\\src\\images\\masina-de-salvare.gif";
+
 
 const Login = (props: any) => {
     const [username, setUsername] = useState("");
@@ -59,9 +61,6 @@ const Login = (props: any) => {
                     const userID = data.id;
                     localStorage.setItem("userID", userID);
 
-                    const userRole = data.role;
-                    localStorage.setItem("userRole", userRole);
-
                     console.log(data.non_field_errors);
 
                     if (
@@ -69,9 +68,6 @@ const Login = (props: any) => {
                         data.non_field_errors[0] ==
                         "Unable to log in with provided credentials."
                     ) {
-                        // setTimeout(() => {
-                        //     navigate("/");
-                        // }, 500);
                         setRightCredentials(false);
                     } else {
                         setTimeout(() => {
@@ -91,9 +87,10 @@ const Login = (props: any) => {
 
     return (
         <div className="bodyCustom">
+            <img src={cornerImage} alt="Corner Image" className="corner-image-left-ambulanta"/>
             <section>
                 <div className="arrow-container" onClick={handleCancel}>
-                    <button className="add-button">&#8592;</button>
+                    <button className="arrow-button">🔙</button>
                 </div>
             </section>
         <div className="mainContainer">

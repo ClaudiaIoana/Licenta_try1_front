@@ -9,7 +9,7 @@ const Notes = (props: any) => {
     const [allNotes, setAllNotes] = useState<Note[]>([]);
     const [desiredCommand, setDesiredCommand] = useState(0);
     const [selectedNote, setSelectedNote] = useState<Note | null>(null);
-
+    const [menuOpen, setMenuOpen] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -42,12 +42,17 @@ const Notes = (props: any) => {
         setSelectedNote(note);
     };
 
+    const toggleMenu = () => {
+        setMenuOpen(!menuOpen);
+    };
+
     return (
         <div>
             <div className="welcome-container">
                 <section>
                     <div className="arrow-container" onClick={handleCancel}>
-                        <button className="arrow-button">&#8592;</button>
+                        <button className="arrow-button">🔙
+                        </button>
                     </div>
                 </section>
                 <header className="header">
@@ -60,7 +65,7 @@ const Notes = (props: any) => {
             <div className="add-note-section">
                 <Link to="/add-note">
                     <button className="add-note-button">
-                        <span className="plus-sign">+</span> Crează o nouă notiță
+                        <span className="plus-sign">📗</span> Notițe noi
                     </button>
                 </Link>
             </div>

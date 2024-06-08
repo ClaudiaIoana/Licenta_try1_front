@@ -103,22 +103,22 @@ const ArchivedCards = (props: any) => {
             <div className="welcome-container">
                 <section>
                     <div className="arrow-container" onClick={handleCancel}>
-                        <button className="arrow-button">&#8592;</button>
+                        <button className="arrow-button">🔙</button>
                     </div>
                 </section>
                 <header className="header">
                     <div className="welcome-message">
-                        <h1>Cardurile arhivate</h1>
+                        <h1>Flashcardurile arhivate</h1>
                     </div>
                 </header>
             </div>
 
             <div className="content-container">
-                <div className="notes-container">
+                <div className="notes-container4">
                     {allFlashcards.map((card, index) => (
                         <div
                             key={index}
-                            className={`note-cube note-type-${index % 8}`}
+                            className={`note-cube card-type-${index % 8}`}
                         >
                             <div style={{ marginBottom: "10px" }}>
                                 <div className="title">
@@ -130,8 +130,11 @@ const ArchivedCards = (props: any) => {
                             </div>
                             <div>
                             <button className="trashcan-button" onClick={() => handleDelete(card)}> 🗑️
+                                <span className="hover-text-archive">Șterge flashcardul</span>
                             </button>
-                            <button className="trashcan-button" onClick={() => handleUnarchive(card)}>📥</button>
+                            <button className="pen" onClick={() => handleUnarchive(card)}>📥
+                                <span className="hover-text-pen">Dezarhivează flashcardul</span>
+                            </button>
                             </div>
                         </div>
                     ))}

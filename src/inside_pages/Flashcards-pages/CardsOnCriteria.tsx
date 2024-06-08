@@ -1,16 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
-import {Link, useLocation} from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Flashcard } from "../../models/Flashcard";
 import allFlashCards from "./AllFlashCards";
-
+import cornerImage from "C:\\LICENTA\\front_try2\\src\\images\\heart-img.png";
 
 const CardsOnCriteria = (props: any) => {
     const [height, setHeight] = useState('initial');
     const [allFlashcards, setAllFlashcards] = useState<Flashcard[]>([]);
     const [flippedIndex, setFlippedIndex] = useState<number | null>(null);
     const [currentIndex, setCurrentIndex] = useState<number>(0);
-
-
+    const [lengthCards, setLengthCards] = useState<number>(0);
     const frontEls = useRef<(HTMLDivElement | null)[]>([]);
     const backEls = useRef<(HTMLDivElement | null)[]>([]);
     const location = useLocation();
@@ -30,7 +29,7 @@ const CardsOnCriteria = (props: any) => {
                 );
                 const data = await response.json();
                 setAllFlashcards(data);
-                console.log(data);
+                setLengthCards(data.length);
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
@@ -38,7 +37,6 @@ const CardsOnCriteria = (props: any) => {
 
         fetchData();
     }, []);
-
 
     function setMaxHeight() {
         let maxHeight = 0;
@@ -73,7 +71,6 @@ const CardsOnCriteria = (props: any) => {
     };
 
     const handleFlag = (card: Flashcard) => {
-        console.log(allFlashcards);
         const index2 = flagedQuestions.findIndex((q) => q.id === card.id);
         if (index2 !== -1) {
             const updatedList = [...flagedQuestions];
@@ -84,31 +81,32 @@ const CardsOnCriteria = (props: any) => {
         }
     };
 
-    console.log(flagedQuestions)
-
-
     const currentCard = allFlashcards.length > 0 ? allFlashcards[currentIndex] : null;
-
 
     return (
         <div>
             <div className="welcome-container">
+                <img src={cornerImage} alt="Corner Image" className="corner-image-left3" />
                 <section>
                     <div className="arrow-container" onClick={handleCancel}>
-                        <button className="arrow-button">&#8592;</button>
+                        <button className="arrow-button">🔙</button>
                     </div>
                 </section>
                 <header className="header">
                     <div className="welcome-message">
-                        <h1>Criteriu de testare: {criteriaCards.name}</h1>
+                        <h1>{criteriaCards.name}</h1>
                     </div>
                 </header>
             </div>
 
+            <button className="flag-button" onClick={() => handleFlag(allFlashcards[currentIndex])}>🚩</button>
+            <p style={{ fontSize: 25 }}> Flashcarduri neștiute: {flagedQuestions.length}</p>
+            {flagedQuestions.some((q) => q.id === allFlashcards[currentIndex]?.id) && (
+                <h3 style={{color:"darkred"}}>Acest flashcard a fost marcat ca neștiut!</h3>
+            )}
+
             <div className="content-container">
                 <div className="notes-container3">
-                    <button className="trashcan-button" onClick={() => handleFlag(allFlashcards[currentIndex])}>🚩</button>
-
                     <div
                         key={currentIndex}
                         className={`card ${currentIndex === flippedIndex ? 'flip' : ''}`}
@@ -116,28 +114,26 @@ const CardsOnCriteria = (props: any) => {
                         onClick={() => handleCardClick(currentIndex)}
                     >
 
-
                         <div className="front" ref={(el) => frontEls.current[currentIndex] = el}>
                             {currentCard?.front}
-                            {flagedQuestions.some((q) => q.id === allFlashcards[currentIndex]?.id) && (
-                                <div className="flag-message">Marcat</div>
-                            )}
                         </div>
                         <div className="back" ref={(el) => backEls.current[currentIndex] = el}>
                             {currentCard?.back}
                         </div>
                     </div>
                 </div>
+
+            </div>
+
+            <div>
+                <button onClick={handlePrevious} className="pagination-button">⬅️</button>
+                <button onClick={handleNext} className="pagination-button">➡️</button>
             </div>
             <div>
-                <p>{currentIndex+1}</p>
-            </div>
-            <div>
-                <button onClick={handlePrevious}>Prev</button>
-                <button onClick={handleNext}>Next</button>
+                <p style={{ fontSize: 25 }}>{currentIndex + 1}/{lengthCards}</p>
             </div>
         </div>
     );
 }
 
-export default CardsOnCriteria
+export default CardsOnCriteria;

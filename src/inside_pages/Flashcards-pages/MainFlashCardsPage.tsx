@@ -3,6 +3,8 @@ import {Link, useNavigate} from "react-router-dom";
 import {Note} from "../../models/Note";
 import {Flashcard} from "../../models/Flashcard";
 import AllFlashCards from "./AllFlashCards";
+import cornerImage from "C:\\LICENTA\\front_try2\\src\\images\\cornerImg-removebg-preview.png";
+
 
 const MainFlashCardsPage = (props: any) => {
 
@@ -36,19 +38,18 @@ const MainFlashCardsPage = (props: any) => {
 
     return (
         <div className="page-container">
+            <img src={cornerImage} alt="Corner Image" className="corner-image-left" />
+
             <div className="welcome-container">
                 <section>
                     <div className="arrow-container" onClick={handleCancel}>
-                        <button className="arrow-button">&#8592;</button>
+                        <button className="arrow-button">🔙</button>
                     </div>
                 </section>
                 <header className="header">
                     <div className="welcome-message">
                     </div>
                 </header>
-            </div>
-            <div>
-                <p> BLa bla bla intro</p>
             </div>
 
             <div className="sections-container">
@@ -57,16 +58,19 @@ const MainFlashCardsPage = (props: any) => {
                     <h2 className="section-title">Toate flashcardurile</h2>
                     <div className="button-container">
                         <button className="add-button2"
-                                onClick={onAddNotes}>&#8594;</button>
+                                onClick={onAddNotes}>💊</button>
+                        <span>Navighează spre flashcardurile tale.</span>
 
                     </div>
                 </section>
 
                 <section className="section">
-                    <h2 className="section-title">Criterii de testare</h2>
+                    <h2 className="section-title">Categorii de testare</h2>
                     <div className="button-container">
                         <button className="add-button2"
-                                onClick={onCriterias}>&#8594;</button>
+                                onClick={onCriterias}>
+                            🩻</button>
+                        <span>Testează-ți cunoștițele în funcție de anumite categorii.</span>
                     </div>
                 </section>
 
@@ -74,7 +78,9 @@ const MainFlashCardsPage = (props: any) => {
                     <h2 className="section-title">Domenii de testare</h2>
                     <div className="button-container">
                         <button className="add-button2"
-                                onClick={onDomain}>&#8594;</button>
+                                onClick={onDomain}>🩸</button>
+                        <span>Testează-ți cunoștițele în funcție de anumite domenii.</span>
+
                     </div>
                 </section>
 
@@ -82,7 +88,8 @@ const MainFlashCardsPage = (props: any) => {
                     <h2 className="section-title">Cardurile arhivate</h2>
                     <div className="button-container">
                         <button className="add-button2"
-                                onClick={onArchivedCards}>&#8594;</button>
+                                onClick={onArchivedCards}>🧫</button>
+                        <span>Navighează spre flashcardurile tale arhivate.</span>
                     </div>
                 </section>
             </div>

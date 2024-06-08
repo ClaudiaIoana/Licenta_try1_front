@@ -16,13 +16,16 @@ import DetailsNote from "./inside_pages/DetailsNote";
 import MainFlashCardsPage from "./inside_pages/Flashcards-pages/MainFlashCardsPage";
 import DisplayAllCriteria from "./inside_pages/Flashcards-pages/DisplayAllCriteria";
 import DisplayAllDomains from "./inside_pages/Flashcards-pages/DisplayAllDomains";
-import CardsOnDetail from "./inside_pages/Flashcards-pages/CandsOnDomain";
-import CardsOnDomain from "./inside_pages/Flashcards-pages/CandsOnDomain";
+import CardsOnDetail from "./inside_pages/Flashcards-pages/CardsOnDomain";
+import CardsOnDomain from "./inside_pages/Flashcards-pages/CardsOnDomain";
 import CardsOnCriteria from "./inside_pages/Flashcards-pages/CardsOnCriteria";
 import ArchivedCards from "./inside_pages/Flashcards-pages/ArchivedCards";
 import AddFlashcards from "./inside_pages/Flashcards-pages/AddFlashcards";
 import AddCriteria from "./inside_pages/Flashcards-pages/AddCriteria";
 import AddDomain from "./inside_pages/Flashcards-pages/AddDomain";
+import UpdateFlashcard from "./inside_pages/Flashcards-pages/UpdateFlashcard";
+import Chatbot from "./inside_pages/Chatbot";
+import OldQuestions from "./inside_pages/OldQuestions";
 
 function App() {
     const [loggedIn, setLoggedIn] = useState(false);
@@ -74,11 +77,15 @@ function App() {
                     <Route path="/flash_cards/add_card" element={<AddFlashcards />} />
                     <Route path="/flash_cards/add_criteria" element={<AddCriteria />} />
                     <Route path="/flash_cards/add_domain" element={<AddDomain />} />
+                    <Route path="/flash_cards/update_card" element={<UpdateFlashcard></UpdateFlashcard>} />
 
 
                     <Route path="/add-note" element={<AddNote></AddNote>} />
                     <Route path="/details-note" element={<DetailsNote></DetailsNote>}/>
                     <Route path="/update-note" element={<UpdateNote></UpdateNote>}/>
+                    <Route path="/chat-bot" element={<Chatbot></Chatbot>}/>
+                    <Route path="/old-questions" element={<OldQuestions></OldQuestions>}/>
+
 
                 </Routes>
             </Router>

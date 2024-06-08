@@ -1,21 +1,14 @@
-import React, { useState, useEffect } from "react";
-import {Link, Routes} from "react-router-dom";
-
+import React, { useState } from "react";
 
 const AddFlashcards = () => {
-    let [error, setError] = useState<string | null>(null);
+    const [error, setError] = useState<string | null>(null);
     const [isCardAdded, setIsCardAdded] = useState(false);
 
-
     const [cardData, setCardData] = useState({
-        front : "",
+        front: "",
         back: "",
     });
 
-
-    const addCard = () => {
-        console.log("for now");
-    }
 
     const handleDataChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -30,10 +23,10 @@ const AddFlashcards = () => {
         window.location.href = `/flash_cards/all-cards`;
     };
 
-    const onSaveNewCard = async (event: { preventDefault: () => void }) =>{
-        console.log('here')
-        try{
-            const response = await fetch("http://127.0.0.1:8000/flashcards/flashcards/",
+    const onSaveNewCard = async (event: { preventDefault: () => void }) => {
+        try {
+            const response = await fetch(
+                "http://127.0.0.1:8000/flashcards/flashcards/",
                 {
                     method: "POST",
                     body: JSON.stringify({
@@ -43,11 +36,12 @@ const AddFlashcards = () => {
                     }),
                     headers: {
                         Accept: "application/json",
-                        'Authorization': `${localStorage.getItem("token")}`,
+                        Authorization: `${localStorage.getItem("token")}`,
                         "Content-Type":
                             "application/json;charset=UTF-8;multipart/form-data",
                     },
-                });
+                }
+            );
             if (!response.ok) {
                 if (response.status === 400) {
                     setError("Bad Request: Invalid data");
@@ -62,8 +56,6 @@ const AddFlashcards = () => {
                 setIsCardAdded(true);
             }
         } catch (error) {
-            console.log("blaaaaa")
-            console.log(error)
             console.error(error);
             setError("An unexpected error occurred");
         }
@@ -76,28 +68,26 @@ const AddFlashcards = () => {
         <div>
             <section>
                 <div className="arrow-container" onClick={handleCancel}>
-                    <button className="add-button">&#8592;</button>
+                    <button className="arrow-button">🔙</button>
                 </div>
             </section>
             <div className="add-note-container">
-                <form onSubmit={addCard}>
+                <form onSubmit={(e) => e.preventDefault()}>
                     <label>
-                        Front:
+                        Față:
                         <input
-                            type="string"
+                            type="text"
                             name="front"
                             value={cardData.front}
                             onChange={handleDataChange}
                         />
                     </label>
                     <label>
-                        Back:
+                        Spate:
                         <textarea
                             name="back"
                             value={cardData.back}
-                            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
-                                handleDataChange(e)
-                            }
+                            onChange={handleDataChange}
                             rows={10}
                         />
                     </label>
@@ -106,15 +96,12 @@ const AddFlashcards = () => {
                     className="add-note-button"
                     type="button"
                     onClick={onSaveNewCard}
-                    value={"Add card"}
+                    value={"Salvează"}
                 />
-
+                {error && <p className="error-message">{error}</p>}
             </div>
         </div>
-
-
     );
-
-}
+};
 
 export default AddFlashcards;

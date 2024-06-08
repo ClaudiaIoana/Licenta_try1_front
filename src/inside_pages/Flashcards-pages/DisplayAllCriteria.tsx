@@ -8,7 +8,10 @@ const DisplayAllCriteria = (props: any) => {
     const [allCriteria, setAllCriteria] = useState<Criteria[]>([]);
     const [selectedCriteria, setSelectedCriteria] = useState<Criteria | null>(null);
     const [unusedCards, setUnusedCards] = useState<Flashcard[]>([]);
+    const [cardsOnCriteria, setCardsOnCriteria] = useState<Flashcard[]>([]);
     const [isEditing, setIsEditing] = useState(false);
+    const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
+    const [isAddCardPopupOpen, setIsAddCardPopupOpen] = useState(false);
     let [error, setError] = useState<string | null>(null);
 
 
@@ -19,7 +22,7 @@ const DisplayAllCriteria = (props: any) => {
                     `http://127.0.0.1:8000/flashcards/category/`,
                     {
                         headers: {
-                            'Authorization': `${localStorage.getItem("token")}` // Assuming you're using Token-based authentication
+                            'Authorization': `${localStorage.getItem("token")}`
                         }
                     }
                 );
@@ -43,12 +46,15 @@ const DisplayAllCriteria = (props: any) => {
 
     const handlePlusClick = (criteria: Criteria) => {
         setSelectedCriteria(criteria);
+        setIsAddCardPopupOpen(true);
         addFlashcardToCriteria(criteria);
+        getFlashcardsOnCriteria(criteria);
     };
 
     const handleClosePopup = () => {
         setSelectedCriteria(null);
         setIsEditing(false);
+        setIsAddCardPopupOpen(false);
     };
 
     const handleEditCriteria = async () => {
@@ -106,6 +112,53 @@ const DisplayAllCriteria = (props: any) => {
         }
     }
 
+    const getFlashcardsOnCriteria = async (selectedCriteria : Criteria) => {
+        try {
+            const response = await fetch(
+                `http://127.0.0.1:8000/flashcards/flashcards/?criteria=${selectedCriteria.id}`,
+                {
+                    headers: {
+                        'Authorization': `${localStorage.getItem("token")}`
+                    }
+                }
+            );
+            const data = await response.json();
+            setCardsOnCriteria(data);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
+    }
+
+    const handleDeleteCriteria = (criteria: Criteria) => {
+        setSelectedCriteria(criteria);
+        setIsDeletePopupOpen(true);
+    };
+
+    const handleDeleteConfirmation = async () => {
+        try {
+            const response = await fetch(`http://127.0.0.1:8000/flashcards/category/${selectedCriteria?.id}`, {
+                method: "DELETE",
+                headers: {
+                    Authorization: `${localStorage.getItem("token")}`,
+                },
+            });
+            if (response.ok) {
+                const responseData = await response.text();
+                if (responseData) {
+                    const data = JSON.parse(responseData);
+                    console.log(data);
+                }
+                setTimeout(() => {
+                    window.location.reload();
+                }, 500);
+            } else {
+                throw new Error("Failed to delete note");
+            }
+        } catch (error) {
+            console.error("Error deleting note:", error);
+        }
+    };
+
     const addCardToCriteria = async (card: Flashcard, selectedCriteria: Criteria) => {
         try {
             const response = await fetch("http://127.0.0.1:8000/flashcards/category_card/", {
@@ -127,17 +180,39 @@ const DisplayAllCriteria = (props: any) => {
         } catch (error) {
             console.error(error);
         }
-        setTimeout(() => {
-            window.location.reload();
-        }, 500);
+        handleClosePopup();
     }
+
+    const deleteCardFromCriteria = async (card: Flashcard, selectedCriteria: Criteria) => {
+        try {
+            const response = await fetch(`http://127.0.0.1:8000/flashcards/category_card/0`, {
+                method: "DELETE",
+                body: JSON.stringify({
+                    criteria: selectedCriteria.id,
+                    card: card.id,
+                }),
+                headers: {
+                    Accept: "application/json",
+                    'Authorization': `${localStorage.getItem("token")}`,
+                    "Content-Type": "application/json;charset=UTF-8;multipart/form-data",
+                },
+            });
+            if (response.ok) {
+                const data = await response.json();
+                console.log(data);
+            }
+        } catch (error) {
+            console.error(error);
+        }
+        handleClosePopup();
+    };
 
     return (
         <div>
             <div className="welcome-container">
                 <section>
                     <div className="arrow-container" onClick={handleCancel}>
-                        <button className="arrow-button">&#8592;</button>
+                        <button className="arrow-button">🔙</button>
                     </div>
                 </section>
                 <header className="header">
@@ -149,41 +224,61 @@ const DisplayAllCriteria = (props: any) => {
             <div className="add-note-section">
                 <Link to="/flash_cards/add_criteria">
                     <button className="add-note-button">
-                        <span className="plus-sign">+</span> Crează un nou criteriu
+                        <span className="plus-sign">+</span> Crează o categorie
                     </button>
                 </Link>
             </div>
 
             <div className="content-container">
-                <div className="notes-container2">
-                    <ul>
-                        {allCriteria.map((criteria, index) => (
-                            <li key={index}>
-                                <div>
-                                    <button onClick={() => handlePlusClick(criteria)}>+</button>
-                                    <button onClick={() => handleEditClick(criteria)}>Edit</button>
-                                    <Link to="/flash_cards/criteria/card" state={{ criteriaCards: criteria }}>{criteria.name}</Link>
-                                </div>
-                                <ul>
-                                    <li>{criteria.details}</li>
-                                </ul>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
+                <table className="notes-container6">
+                    <tr className="table-header">
+                        <th className="table-header-text">Nume</th>
+                        <th className="table-header-text">Detalii</th>
+                        <th className="table-header-text">Modifică</th>
+                        <th className="table-header-text">Șterge</th>
+                        <th className="table-header-text">Editează flashcardurile</th>
+                    </tr>
+                    {allCriteria.map((criteria, index) => (
+                        <tr key={index} className="table-row">
+                            <td><Link to="/flash_cards/criteria/card" state={{ criteriaCards: criteria }}>{criteria.name}</Link></td>
+                            <td>{criteria.details}</td>
+                            <td>
+                                <button onClick={() => handleEditClick(criteria)}>Modifică</button>
+                            </td>
+                            <td>
+                                <button onClick={() => handleDeleteCriteria(criteria)}>Șterge</button>
+                            </td>
+                            <td>
+                                <button onClick={() => handlePlusClick(criteria)}>Editează</button>
+                            </td>
+                        </tr>
+                    ))}
+                </table>
             </div>
 
-            {selectedCriteria && (
-                <div className="popup">
-                    <div className="popup-inner">
+            {selectedCriteria && isAddCardPopupOpen && (
+                <div className="popup-edit-flashcards">
+                    <div className="popup-inner-edit-flashcards">
                         <button className="exit-button" onClick={handleClosePopup}>X</button>
+                        <h2>Flashcarduri care pot fii adaugate la criteriul de testare</h2>
                         <ul>
                             {unusedCards.map((card, index) => (
                                 <li key={index}>
-                                    <p>Front: {card.front}</p>
-                                    <p>Back: {card.back}</p>
-                                    <button onClick={() => addCardToCriteria(card, selectedCriteria)}>Add</button>
+                                    <p>Față: {card.front}</p>
+                                    <p>Spate: {card.back}</p>
+                                    <button onClick={() => addCardToCriteria(card, selectedCriteria)} className="button-popup">Adaugă</button>
                                 </li>
+                            ))}
+                        </ul>
+                        <h2>Flashcarduri care apartin criteriului de testare</h2>
+                        <ul>
+                            {cardsOnCriteria.map((card, index) => (
+
+                                    <li key={index}>
+                                        <p>Față: {card.front}</p>
+                                        <p>Spate: {card.back}</p>
+                                        <button onClick={() => deleteCardFromCriteria(card, selectedCriteria)} className="button-popup">Șterge</button>
+                                    </li>
                             ))}
                         </ul>
                     </div>
@@ -194,17 +289,44 @@ const DisplayAllCriteria = (props: any) => {
                 <div className="popup">
                     <div className="popup-inner">
                         <button className="exit-button" onClick={handleClosePopup}>X</button>
-                        {/* Your editing form goes here */}
-                        <input
-                            type="text"
-                            value={selectedCriteria.name}
-                            onChange={(e) => setSelectedCriteria({ ...selectedCriteria, name: e.target.value })}
-                        />
-                        <textarea
-                            value={selectedCriteria.details}
-                            onChange={(e) => setSelectedCriteria({ ...selectedCriteria, details: e.target.value })}
-                        />
-                        <button onClick={handleEditCriteria}>Save</button>
+                        <h2>Modifică categoria</h2>
+                        <div>
+                            <label>
+                                Nume:
+                                <br/>
+                                    <input
+                                        type="text"
+                                        className="inputField update-criteria-field"
+                                        value={selectedCriteria.name}
+                                        onChange={(e) => setSelectedCriteria({ ...selectedCriteria, name: e.target.value })}
+                                    />
+                            </label>
+                        </div>
+                        <div>
+                            <label>
+                                Detalii:
+                                <br/>
+                                <input
+                                    type="text"
+                                    className="inputField update-criteria-field"
+                                    value={selectedCriteria.details}
+                                    onChange={(e) => setSelectedCriteria({ ...selectedCriteria, details: e.target.value })}
+                                />
+                            </label>
+                        </div>
+                        <button onClick={handleEditCriteria} className="button-popup">Salvează</button>
+                    </div>
+                </div>
+            )}
+
+            {isDeletePopupOpen && selectedCriteria && (
+                <div className="popup">
+                    <div className="popup-inner">
+                        <button className="exit-button" onClick={() => setIsDeletePopupOpen(false)}>X</button>
+                        <h2>Ești sigur că vrei să ștergi această categorie?</h2>
+                        <p>{selectedCriteria.name}</p>
+                        <button onClick={handleDeleteConfirmation} style={{ background: '#0056b3' }}>Da</button>
+                        <button onClick={() => setIsDeletePopupOpen(false)} style={{ marginLeft: '30px' , background: '#0056b3' }}>Nu</button>
                     </div>
                 </div>
             )}

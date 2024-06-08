@@ -75,13 +75,13 @@ const AddCriteria = () => {
         <div>
             <section>
                 <div className="arrow-container" onClick={handleCancel}>
-                    <button className="add-button">&#8592;</button>
+                    <button className="arrow-button">🔙</button>
                 </div>
             </section>
             <div className="add-note-container">
                 <form onSubmit={addCriteria}>
                     <label>
-                        Name:
+                        Nume:
                         <input
                             type="string"
                             name="name"
@@ -90,7 +90,7 @@ const AddCriteria = () => {
                         />
                     </label>
                     <label>
-                        Detials:
+                        Detalii:
                         <textarea
                             name="details"
                             value={criteriaData.details}
@@ -105,7 +105,7 @@ const AddCriteria = () => {
                     className="add-note-button"
                     type="button"
                     onClick={onSaveNewCriteria}
-                    value={"Add criteria"}
+                    value={"Adaugă categoria"}
                 />
 
             </div>

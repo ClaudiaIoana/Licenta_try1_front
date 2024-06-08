@@ -1,44 +1,51 @@
 import React, { useState, useEffect } from "react";
-import {Link, Routes} from "react-router-dom";
+import {Link, Route, Routes, useLocation} from "react-router-dom";
 
-const AddDomain = () => {
+
+const UpdateFlashcard = (props:any) =>{
+    const location = useLocation();
+    const cardDetail = location.state?.noteDetail || {};
     let [error, setError] = useState<string | null>(null);
-    const [isDomainAdded, setIsDomainAdded] = useState(false);
+    const [isNoteAdded, setIsNoteAdded] = useState(false);
 
 
-    const [domainData, setDomainData] = useState({
-        name : "",
-        details: "",
+    const [cardData, setCardData] = useState({
+        front : cardDetail.front,
+        back: cardDetail.back,
     });
 
-
-    const addDomain = () => {
+    const addCard = () => {
         console.log("for now");
     }
 
-    const handleDataChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+
+    const MAX_CHARACTERS = 250;
+
+    const handleDataChange = (
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
         const { name, value } = e.target;
-        console.log(name, value);
-        setDomainData((prevData) => ({
-            ...prevData,
-            [name]: value,
-        }));
+        if (value.length <= MAX_CHARACTERS) {
+            setCardData((prevData) => ({
+                ...prevData,
+                [name]: value,
+            }));
+        } else {
+            setError(`Maximum ${MAX_CHARACTERS} characters allowed`);
+        }
     };
-
     const handleCancel = () => {
-        window.location.href = `/flash_cards/domain`;
+        window.location.href = `/flash_cards/all-cards`;
     };
 
-    const onSaveNewDomain = async (event: { preventDefault: () => void }) =>{
-        console.log('here')
+    const onSaveNewCard = async (event: { preventDefault: () => void }) =>{
         try{
-            const response = await fetch("http://127.0.0.1:8000/flashcards/domains/",
+            const response = await fetch(`http://127.0.0.1:8000/flashcards/flashcards/${cardDetail.id}/`,
                 {
-                    method: "POST",
+                    method: "PATCH",
                     body: JSON.stringify({
-                        name: domainData.name,
-                        details: domainData.details,
-                        creator: localStorage.getItem("userID"),
+                        front: cardData.front,
+                        back: cardData.back,
                     }),
                     headers: {
                         Accept: "application/json",
@@ -58,7 +65,7 @@ const AddDomain = () => {
             } else {
                 const data = await response.json();
                 console.log(data);
-                setIsDomainAdded(true);
+                setIsNoteAdded(true);
             }
         } catch (error) {
             console.log("blaaaaa")
@@ -67,7 +74,7 @@ const AddDomain = () => {
             setError("An unexpected error occurred");
         }
         setTimeout(() => {
-            window.location.href = `/flash_cards/domain`;
+            window.location.href = `/flash_cards/all-cards`;
         }, 500);
     };
 
@@ -79,40 +86,39 @@ const AddDomain = () => {
                 </div>
             </section>
             <div className="add-note-container">
-                <form onSubmit={addDomain}>
+                <form onSubmit={addCard}>
                     <label>
-                        Nume:
+                        Față:
                         <input
                             type="string"
-                            name="name"
-                            value={domainData.name}
+                            name="front"
+                            value={cardData.front}
                             onChange={handleDataChange}
                         />
                     </label>
                     <label>
-                        Detalii:
+                        Spate:
                         <textarea
-                            name="details"
-                            value={domainData.details}
+                            name="back"
+                            value={cardData.back}
                             onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
                                 handleDataChange(e)
                             }
-                            rows={10}
+                            rows={20}
                         />
                     </label>
                 </form>
-                <input
-                    className="add-note-button"
-                    type="button"
-                    onClick={onSaveNewDomain}
-                    value={"Adaugă domeniu"}
-                />
-
+                    <input
+                        className="add-note-button"
+                        type="button"
+                        onClick={onSaveNewCard}
+                        value={"Modifică flashcardul"}
+                    />
+                {error && <p className="error-message">{error}</p>}
             </div>
         </div>
 
 
     );
-
 }
-export default AddDomain;
+export default UpdateFlashcard;

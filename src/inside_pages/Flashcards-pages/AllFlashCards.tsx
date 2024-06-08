@@ -82,13 +82,16 @@ const AllFlashCards = (props: any) => {
         }
     }
 
+    const truncateText = (text: string, maxLength: number) => {
+        return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
+    }
 
     return (
         <div>
             <div className="welcome-container">
                 <section>
                     <div className="arrow-container" onClick={handleCancel}>
-                        <button className="arrow-button">&#8592;</button>
+                        <button className="arrow-button">🔙</button>
                     </div>
                 </section>
                 <header className="header">
@@ -101,27 +104,39 @@ const AllFlashCards = (props: any) => {
             <div className="add-note-section">
                 <Link to="/flash_cards/add_card">
                     <button className="add-note-button">
-                        <span className="plus-sign">+</span> Crează un nou flashcard
+                        <span className="plus-sign">+</span> Crează un flashcard
                     </button>
                 </Link>
             </div>
 
             <div className="content-container">
-                <div className="notes-container">
+                <div className="notes-container4">
                     {allFlashcards.map((card, index) => (
                         <div
                             key={index}
-                            className={`note-cube note-type-${index % 8}`}
+                            className={`note-cube card-type-${index % 8}`}
+                            onClick={() => handleCardClick(index)}
+                            style={{ '--card-height': 'auto' } as React.CSSProperties}
                         >
                             <div style={{ marginBottom: "10px" }}>
                                 <div className="title" ref={(el) => frontEls.current[index] = el}>
-                                    Front: {card.front}
+                                    Față: {card.front}
                                 </div>
                                 <div className="topic" ref={(el) => backEls.current[index] = el}>
-                                    Back: {card.back}
+                                    Spate: {truncateText(card.back, 200)}
                                 </div>
                             </div>
-                            <button className="trashcan-button" onClick={() => handleArchive(card)}>📦</button>
+                            <div>
+                                <button className="trashcan-button" onClick={() => handleArchive(card)}>📦
+                                    <span className="hover-text-archive">Arhivează flashcardul</span>
+                                </button>
+                                <Link to="/flash_cards/update_card" state={{ noteDetail: card }} >
+                                    <button  className="pen">
+                                        ✏️
+                                        <span className="hover-text-pen">Modifică flashcardul</span>
+                                    </button>
+                                </Link>
+                            </div>
                         </div>
                     ))}
                 </div>
